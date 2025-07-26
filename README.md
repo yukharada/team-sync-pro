@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TeamSync Pro
 
 ![TeamSync Pro Banner](https://your-image-link.com/banner.png)
@@ -137,3 +138,7 @@ MIT License
 - 多言語対応（i18n）
 - Slack / Google Calendar 連携
 - SaaS料金プラン別制限ロジック
+=======
+# team-sync-pro
+All-in-one project and team collaboration tool for remote teams. Built with Spring Boot, React, and AWS.
+>>>>>>> 7882ffed0185c7845036204ecf7c3fd0c9293b31
