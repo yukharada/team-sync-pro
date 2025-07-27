@@ -1,0 +1,20 @@
+version = 1
+
+[[analyzers]]
+name = "java"
+enabled = true
+
+  [analyzers.meta]
+  target = "backend/src/main/java"
+
+[[analyzers]]
+name = "typescript"
+enabled = true
+
+  [analyzers.meta]
+  target = "frontend/src"
+
+# Optional: フォーマットチェックやコミットメッセージスタイルチェックなど
+# [[transformers]]
+# name = "autopep8"
+# enabled = true
