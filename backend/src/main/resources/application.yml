@@ -46,5 +46,5 @@ springdoc:
     path: /swagger-ui.html
 
 jwt:
-  secret: ${JWT_SECRET:mySecretKey}
+  secret: ${JWT_SECRET:generatedBase64StringFromStep1}
   expiration: 86400000 # 24 hours
