@@ -6,6 +6,7 @@ enabled = true
 
   [analyzers.meta]
   target = "backend/src/main/java"
+  java_version = "17"
 
 [[analyzers]]
 name = "typescript"
