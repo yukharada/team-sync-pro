@@ -3,9 +3,17 @@ package com.teamsync.backend.entity;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "project_members", uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "user_id"}))
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProjectMember extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -19,24 +27,7 @@ public class ProjectMember extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MemberRole role = MemberRole.MEMBER;
 
-    // Constructors
-    public ProjectMember() {}
-
-    public ProjectMember(Project project, User user, MemberRole role) {
-        this.project = project;
-        this.user = user;
-        this.role = role;
-    }
-
-    // Getters and Setters
-    public Project getProject() { return project; }
-    public void setProject(Project project) { this.project = project; }
-
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-
-    public MemberRole getRole() { return role; }
-    public void setRole(MemberRole role) { this.role = role; }
+    private LocalDate joinedAt;
 
     public enum MemberRole {
         OWNER, ADMIN, MEMBER, VIEWER

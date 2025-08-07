@@ -3,7 +3,10 @@ package com.teamsync.backend.dto.project;
 import com.teamsync.backend.entity.Project;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -11,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectCreateRequest {
+public class ProjectUpdateRequest {
 
     @NotBlank(message = "プロジェクト名は必須です")
     @Size(min = 1, max = 100, message = "プロジェクト名は1文字以上100文字以下で入力してください")

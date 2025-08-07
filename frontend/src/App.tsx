@@ -10,6 +10,7 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
+import { ProjectsPage } from './pages/projects/ProjectsPage';
 
 const theme = createTheme({
   palette: {
@@ -18,6 +19,26 @@ const theme = createTheme({
     },
     secondary: {
       main: '#dc004c',
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Roboto',
+      '"Noto Sans JP"',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Arial',
+      'sans-serif',
+    ].join(','),
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
     },
   },
 });
@@ -29,8 +50,11 @@ function App() {
         <CssBaseline />
         <Router>
           <Routes>
+            {/* 認証不要ページ */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+
+            {/* 認証必要ページ */}
             <Route
               path="/dashboard"
               element={
@@ -39,6 +63,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/projects"
+              element={
+                <ProtectedRoute>
+                  <ProjectsPage />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* デフォルトリダイレクト */}
             <Route path="/" element={<Navigate to="dashboard" replace />} />
           </Routes>
         </Router>

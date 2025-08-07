@@ -23,15 +23,23 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8080:8080"
+      - "5005:5005" # デバッグポートをホストにマッピング
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      - DB_HOST=postgres
-      - REDIS_HOST=redis
+      # データベース接続情報を環境変数で渡す (Spring Bootが自動で読み込む)
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/teamsync
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=password123
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - JWT_SECRET=a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3
     depends_on:
       - postgres
       - redis
     volumes:
+      # ホストのbackendディレクトリをコンテナの/appにマウントし、リアルタイムの変更を反映
       - ./backend:/app
+      # Mavenのキャッシュを永続化（ビルド速度向上）
       - backend_cache:/root/.m2
 
   frontend:
@@ -42,7 +50,6 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
-      - frontend_node_modules:/app/node_modules
     environment:
       - REACT_APP_API_URL=http://localhost:8080
 
