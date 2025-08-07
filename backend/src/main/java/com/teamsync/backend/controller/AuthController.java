@@ -30,7 +30,14 @@ public class AuthController {
             AuthResponse response = authService.login(loginRequest);
             return ResponseEntity.ok(response);
         }catch (Exception e){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(new AuthResponse(
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    e.getMessage()));
         }
     }
 
@@ -41,7 +48,14 @@ public class AuthController {
             AuthResponse response = authService.register(registerRequest);
             return ResponseEntity.ok(response);
         }catch (Exception e){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(new AuthResponse(
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    e.getMessage()));
         }
     }
 }

@@ -4,14 +4,14 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Maven wrapper and dependencies
-COPY .mvn/ .mvn/
-COPY mvnw pom.xml ./
-RUN chmod +x mvnw
-RUN ./mvnw dependency:go-offline
+COPY pom.xml .
+COPY .mvn .mvn/
+COPY mvnw .
+RUN ./mvnw dependency:go-offline -B
 
-# Source code
-COPY src/ src/
+# 後続のステップでソースコードがマウントされることを想定
+# アプリケーションの実行環境を準備
+CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005'"]
 
 EXPOSE 8080
-
-CMD ["./mvnw", "spring-boot:run"]
+EXPOSE 5005
